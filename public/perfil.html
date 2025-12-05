@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="perfil.css">
+        <title>Perfil - Buzzle</title>
+    </head>
+    <body onload="listarTurma()">
+        <header>
+            <section>
+                <div id="divlogo">
+                    <img src="imagens/logobuzzle.png">
+                </div>
+                <div id="divnav">
+                    
+                </div>
+                <div id="divperfil">
+                    <a href="perfil.html" id="vaiamerda"><div></div></a>
+                </div>
+            </section>
+        </header>
+        <aside>
+            <section id="secnav">
+                <button class="navbut">
+                    Configurações
+                </button>
+                <button class="navbut" onclick="vaiproinicio()">
+                    Início
+                </button>
+            </section>
+            <section id="secturmas">
+                <p id="astitulo">Turmas</p>
+                <section id="subsecturmas">
+                    <!--
+                    <button class="divtur"></button>
+                    <button class="divtur"></button>    
+                    <button class="divtur"></button>
+                    -->
+                </section>
+            </section>
+        </aside>
+        <main>
+            <section id="banner"></section>
+            <section id="secmain">
+                <div id="divmeusaco">
+                    <div id="fotodeperfil"></div>
+                    <p id="teunome">seu nome de bosta meu saco</p>
+                    <p id="teuid">#seuiddebosta</p>
+                </div>
+                <div id="divbotaozin">
+                    <button onclick="tuntuntunsair()">Sair</button>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <section id="secfooter">
+                <div class="divfot">
+                    <img src="imagens/ccm.png">
+                    <img src="imagens/marsela.png">
+                    <img src="imagens/governo.png">
+                </div>
+            </section>
+        </footer>
+        <script src="perfil.js"></script>
+    </body>
+</html>

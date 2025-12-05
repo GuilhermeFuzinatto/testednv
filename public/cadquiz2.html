@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="cadquiz2.css">
+        <title>Criar Quiz - Buzzle</title>
+    </head>
+
+    <!-- agora o onload só chama o que o JS precisa -->
+    <body>
+        <header>
+            <section>
+                <div id="divlogo">
+                    <img src="imagens/logobuzzle.png">
+                </div>
+                <div id="divnav"></div>
+                <div id="divperfil">
+                    <button type="button" id="butcancel" onclick="cancelarCriacao()">Cancelar</button>
+                    <button type="button" id="butsalvar" onclick="salvarTudo()">Salvar Quiz</button>
+                </div>
+            </section>
+        </header>
+
+        <aside>
+            <section id="secnav">
+                <button class="navbut">Configurações</button>
+                <button class="navbut">Início</button>
+            </section>
+
+            <section id="secturmas">
+                <p id="astitulo">Questões</p>
+
+                <!-- AQUI vão os cards gerados via JS -->
+                <section id="listaQuestoes"></section>
+            </section>
+        </aside>
+
+        <main>
+            <section id="fundo">
+                <form id="secmain">
+                    
+                    <!-- Tipo da questão -->
+                    <section id="sectipo">
+                        <button id="tipo1" type="button">única correta</button>
+                        <button id="tipo2" type="button">múltiplas corretas</button>
+                        <button id="tipo3" type="button">verdadeiro ou falso</button>
+                    </section>
+
+                    <!-- Enunciado -->
+                    <section id="secenun">
+                        <p id="enuntitle">Enunciado</p>
+                        <textarea id="enuntxt"></textarea>
+                    </section>
+
+                    <!-- Alternativas -->
+                    <section id="secalt">
+                        <p id="alttitle">Alternativas</p>
+
+                        <div>
+                            <label class="checklabel">
+                                <input type="checkbox" class="checkinput">
+                                <span class="checkspan" title="Selecionar como alternativa correta">✓</span>
+                            </label>
+                            <input type="text" placeholder="Alternativa 1">
+                        </div>
+
+                        <div>
+                            <label class="checklabel">
+                                <input type="checkbox" class="checkinput">
+                                <span class="checkspan" title="Selecionar como alternativa correta">✓</span>
+                            </label>
+                            <input type="text" placeholder="Alternativa 2">
+                        </div>
+
+                        <div>
+                            <label class="checklabel">
+                                <input type="checkbox" class="checkinput">
+                                <span class="checkspan" title="Selecionar como alternativa correta">✓</span>
+                            </label>
+                            <input type="text" placeholder="Alternativa 3">
+                        </div>
+
+                        <div>
+                            <label class="checklabel">
+                                <input type="checkbox" class="checkinput">
+                                <span class="checkspan" title="Selecionar como alternativa correta">✓</span>
+                            </label>
+                            <input type="text" placeholder="Alternativa 4">
+                        </div>
+                    </section>
+
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <section id="secfooter">
+                <div class="divfot">
+                    <img src="imagens/ccm.png">
+                    <img src="imagens/marsela.png">
+                    <img src="imagens/governo.png">
+                </div>
+            </section>
+        </footer>
+
+        <div id="modalPublicar" class="modal">
+            <div class="modal-content">
+                <h2>Publicar Quiz</h2>
+
+                <p>Selecione em quais turmas este quiz será publicado:</p>
+
+                <div id="listaTurmas"></div>
+
+                <p style="margin-top: 10px;">Visibilidade do quiz:</p>
+
+                <label>
+                    <input type="radio" name="visibilidade" value="turmas" checked>
+                    Apenas alunos das turmas escolhidas
+                </label><br>
+
+                <label>
+                    <input type="radio" name="visibilidade" value="publico">
+                    Qualquer pessoa com o ID do quiz
+                </label>
+
+                <div class="modal-buttons">
+                    <button onclick="confirmarPublicacao()">Publicar</button>
+                    <button onclick="fecharModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="cadquiz2.js"></script>
+    </body>
+</html>

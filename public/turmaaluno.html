@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="turmaaluno.css">
+    <title>Turma - Buzzle</title>
+</head>
+<body onload="listarTurma()">
+    <header>
+        <section>
+            <div id="divlogo">
+                <img src="imagens/logobuzzle.png">
+            </div>
+            <div id="divnav">
+                    
+            </div>
+            <div id="divperfil">
+                    
+            </div>
+        </section>
+    </header>
+    <aside>
+        <section id="secnav">
+            <button class="navbut">
+                Configurações
+            </button>
+            <button class="navbut" onclick="vaiproinicio()">
+                Início
+            </button>
+        </section>
+        <section id="secturmas">
+            <p id="astitulo">Turmas</p>
+            <section id="subsecturmas">
+                <!--
+                    <button class="divtur"></button>
+                    <button class="divtur"></button>    
+                    <button class="divtur"></button>
+                    -->
+            </section>
+        </section>
+    </aside>
+    <main>
+        <section id="fundo">
+            <p id="turmanome">nome da turma</p>
+            <p id="turmadesc">descrição da turma</p>
+        </section>
+        <section id="menuTurma">
+            <button onclick="mostrarQuizzes()" class="menuTurmaBut">Quizzes</button>
+            <button onclick="mostrarAlunos()" class="menuTurmaBut">Alunos</button>
+        </section>
+
+        <section id="sectionQuizzes" class="conteudoTurma">
+            <h2>Atividades Pendentes</h2>
+            <div class="carrossel">
+                <button onclick="moveSlide1(-1)" class="bcar">&#10094;</button>
+                <div id="viewport1">
+                    <div id="track1"></div>
+                </div>
+                <button onclick="moveSlide1(1)" class="bcar">&#10095;</button>
+            </div>
+
+            <h2>Atividades Encerradas</h2>
+            <div class="carrossel">
+                <button onclick="moveSlide2(-1)" class="bcar">&#10094;</button>
+                <div id="viewport2">
+                    <div id="track2"></div>
+                </div>
+                <button onclick="moveSlide2(1)" class="bcar">&#10095;</button>
+            </div>
+        </section>
+
+        <section id="sectionAlunos" class="conteudoTurma" style="display:none;">
+            <h2>Alunos da Turma</h2>
+            <div id="listaAlunos"></div><div class="divfot">
+                    <img src="imagens/ccm.png">
+                    <img src="imagens/marsela.png">
+                    <img src="imagens/governo.png">
+                </div>
+        </section>
+    </main>
+    <footer>
+        <section id="secfooter">
+            <div class="divfot">
+                <img src="imagens/ccm.png">
+                <img src="imagens/marsela.png">
+                <img src="imagens/governo.png">
+            </div>
+        </section>
+    </footer>
+    <script src="turmaaluno.js"></script>
+</body>
+</html>
