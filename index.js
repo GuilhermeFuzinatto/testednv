@@ -592,76 +592,104 @@ app.post("/quiz/finalizar", (req, res) => {
 
         const qz_id = row.re_qz_id;
 
-        // 2) Buscar todas as perguntas do quiz
-        const queryPerg = `SELECT pe_numero FROM Pergunta WHERE pe_qz_id = ?`;
-        db.all(queryPerg, [qz_id], (err, perguntas) => {
-            if (err) return res.status(500).send("Erro ao buscar perguntas");
+        // 1.5) Obter o valor do quiz (qz_valor)
+        const queryQuiz = `SELECT qz_valor FROM Quiz WHERE qz_id = ?`;
+        db.get(queryQuiz, [qz_id], (err, quizRow) => {
+            if (err || !quizRow) return res.status(500).send("Erro ao buscar valor do quiz");
+            const qz_valor = Number(quizRow.qz_valor) || 0;
 
-            const perguntaIds = perguntas.map(p => p.pe_numero);
-            if (perguntaIds.length === 0) return res.status(400).send("Quiz sem perguntas");
+            // 2) Buscar todas as perguntas do quiz
+            const queryPerg = `SELECT pe_numero FROM Pergunta WHERE pe_qz_id = ?`;
+            db.all(queryPerg, [qz_id], (err, perguntas) => {
+                if (err) return res.status(500).send("Erro ao buscar perguntas");
 
-            // 3) Buscar todas as alternativas para essas perguntas
-            const queryAlts = `
-                SELECT * FROM Alternativa
-                WHERE av_pe_numero IN (${perguntaIds.map(_ => '?').join(',')})
-            `;
-            db.all(queryAlts, perguntaIds, (err, todasAlts) => {
-                if (err) return res.status(500).send("Erro na correção");
+                const perguntaIds = perguntas.map(p => p.pe_numero);
+                if (perguntaIds.length === 0) return res.status(400).send("Quiz sem perguntas");
 
-                // construir mapa de corretas por pergunta
-                const corretasMap = {}; // pe_numero -> Set(av_numero)
-                perguntaIds.forEach(id => corretasMap[id] = new Set());
-                todasAlts.forEach(a => {
-                    if (a.av_correta == 1) {
-                        corretasMap[a.av_pe_numero].add(a.av_numero);
-                    }
-                });
+                // 3) Buscar todas as alternativas para essas perguntas
+                const queryAlts = `
+                    SELECT * FROM Alternativa
+                    WHERE av_pe_numero IN (${perguntaIds.map(_ => '?').join(',')})
+                `;
+                db.all(queryAlts, perguntaIds, (err, todasAlts) => {
+                    if (err) return res.status(500).send("Erro na correção");
 
-                // montar seleções do aluno por pergunta
-                const selecoes = {}; // pe_numero -> Set(av_numero)
-                respostas.forEach(r => {
-                    if (!selecoes[r.pe_numero]) selecoes[r.pe_numero] = new Set();
-                    // permitir que frontend envie múltiplas entradas (uma por alternativa) ou arrays
-                    selecoes[r.pe_numero].add(r.av_numero);
-                });
+                    // construir mapa de corretas por pergunta
+                    const corretasMap = {}; // pe_numero -> Set(av_numero)
+                    perguntaIds.forEach(id => corretasMap[id] = new Set());
+                    todasAlts.forEach(a => {
+                        if (a.av_correta == 1) {
+                            corretasMap[a.av_pe_numero].add(a.av_numero);
+                        }
+                    });
 
-                let certas = 0;
-                let totalPoints = 0;
+                    // montar seleções do aluno por pergunta
+                    const selecoes = {}; // pe_numero -> Set(av_numero)
+                    respostas.forEach(r => {
+                        if (!selecoes[r.pe_numero]) selecoes[r.pe_numero] = new Set();
+                        // permitir que frontend envie múltiplas entradas (uma por alternativa) ou arrays
+                        selecoes[r.pe_numero].add(r.av_numero);
+                    });
 
-                perguntaIds.forEach(pe => {
-                    const corretasSet = corretasMap[pe] || new Set();
-                    const correctCount = corretasSet.size || 0;
-                    const selectedSet = selecoes[pe] || new Set();
+                    let certas = 0;
+                    let totalPoints = 0;
 
-                    // contar quantos selecionados estão corretos
-                    let selectedCorrect = 0;
-                    let selectedIncorrect = 0;
-                    for (let av of selectedSet) {
-                        if (corretasSet.has(av)) selectedCorrect++;
-                        else selectedIncorrect++;
-                    }
+                    perguntaIds.forEach(pe => {
+                        const corretasSet = corretasMap[pe] || new Set();
+                        const correctCount = corretasSet.size || 0;
+                        const selectedSet = selecoes[pe] || new Set();
 
-                    if (correctCount > 0) {
-                        totalPoints += selectedCorrect / correctCount;
-                    } else {
-                        // sem alternativas corretas definidas, considera 0
-                    }
+                        // contar quantos selecionados estão corretos
+                        let selectedCorrect = 0;
+                        let selectedIncorrect = 0;
+                        for (let av of selectedSet) {
+                            if (corretasSet.has(av)) selectedCorrect++;
+                            else selectedIncorrect++;
+                        }
 
-                    // considera questão "certa" apenas se marcou todas corretas e nenhuma incorreta
-                    if (correctCount > 0 && selectedCorrect === correctCount && selectedIncorrect === 0) certas++;
-                });
+                        if (correctCount > 0) {
+                            totalPoints += selectedCorrect / correctCount;
+                        } else {
+                            // sem alternativas corretas definidas, considera 0
+                        }
 
-                const totalQuestions = perguntaIds.length;
-                const nota = Math.round((totalPoints / totalQuestions) * 10);
+                        // considera questão "certa" apenas se marcou todas corretas e nenhuma incorreta
+                        if (correctCount > 0 && selectedCorrect === correctCount && selectedIncorrect === 0) certas++;
+                    });
 
-                // atualizar a tabela Resposta com certas e nota
-                const upd = `UPDATE Resposta SET re_certas = ?, re_nota = ? WHERE re_id = ?`;
-                db.run(upd, [certas, nota, re_id], function(err) {
-                    if (err) return res.status(500).send("Erro ao salvar resultado");
-                    return res.json({ certas, nota });
+                    const totalQuestions = perguntaIds.length;
+
+                    // --- AQUI: nota baseada no valor do quiz (qz_valor) ---
+                    // totalPoints varia entre 0 e totalQuestions, então (totalPoints/totalQuestions) é fração correta.
+                    const notaFloat = (totalPoints / totalQuestions) * qz_valor;
+                    const nota = Math.round(notaFloat);
+
+                    // atualizar a tabela Resposta com certas e nota
+                    const upd = `UPDATE Resposta SET re_certas = ?, re_nota = ? WHERE re_id = ?`;
+                    db.run(upd, [certas, nota, re_id], function(err) {
+                        if (err) return res.status(500).send("Erro ao salvar resultado");
+                        return res.json({ certas, nota, max: qz_valor });
+                    });
                 });
             });
         });
+    });
+});
+
+app.get("/aluno/:al_id/feitos", (req, res) => {
+    const { al_id } = req.params;
+
+    const query = `
+        SELECT re_qz_id 
+        FROM Resposta
+        WHERE re_al_id = ?
+    `;
+
+    db.all(query, [al_id], (err, rows) => {
+        if (err) return res.status(500).send("Erro ao buscar quizzes feitos");
+
+        const feitos = rows.map(r => r.re_qz_id);
+        res.json(feitos);
     });
 });
 
