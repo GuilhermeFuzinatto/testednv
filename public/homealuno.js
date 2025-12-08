@@ -98,7 +98,7 @@ function selecTurma(id, nome, desc, prid) {
 }
 
 // ================================
-//     LISTAR QUIZZES (CORRIGIDO)
+//     LISTAR QUIZZES
 // ================================
 async function listarQuizzes() {
     const enviadas = document.getElementById("secroladora1");
@@ -110,14 +110,10 @@ async function listarQuizzes() {
         let quizzes = [];
         const turmaSelecionada = JSON.parse(localStorage.getItem("turma"));
 
-        // 1) Se estiver dentro da turma → listar só daquela turma
         if (turmaSelecionada && turmaSelecionada.id) {
             const res = await fetch(`/turma/${turmaSelecionada.id}/quizzes`);
             quizzes = await res.json();
-        }
-
-        // 2) Se estiver na home → quizzes de todas as turmas que o aluno participa
-        else {
+        } else {
             const turmas = await fetch(`/aluno/${user.id}/turmas`).then(r => r.json());
 
             for (const turma of turmas) {
@@ -126,18 +122,15 @@ async function listarQuizzes() {
                 quizzes.push(...qzs);
             }
 
-            // remover duplicados
             quizzes = quizzes.filter(
                 (q, i, arr) => i === arr.findIndex(x => x.qz_id === q.qz_id)
             );
         }
 
-        // SEPARAR PENDENTES E ENCERRADOS
         const agora = new Date();
         const enviadasLista = quizzes.filter(q => new Date(q.qz_prazo) > agora);
         const encerradasLista = quizzes.filter(q => new Date(q.qz_prazo) <= agora);
 
-        // Pendentes
         if (enviadasLista.length === 0) {
             enviadas.innerHTML = "<p>Nenhuma atividade pendente.</p>";
         } else {
@@ -149,7 +142,6 @@ async function listarQuizzes() {
             });
         }
 
-        // Encerrados
         if (encerradasLista.length === 0) {
             encerradas.innerHTML = "<p>Nenhuma atividade encerrada.</p>";
         } else {
@@ -161,27 +153,13 @@ async function listarQuizzes() {
             });
         }
 
-        // ================================
-        // APÓS FINALIZAR UM QUIZ → IR PARA ATIVIDADES FEITAS
-        // ================================
-        const finalizado = JSON.parse(localStorage.getItem("quizFinalizado"));
-
-        if (finalizado) {
-            const secaoEncerradas = document.getElementById("secatvenc");
-            if (secaoEncerradas) {
-                secaoEncerradas.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            localStorage.removeItem("quizFinalizado");
-        }
-
     } catch (e) {
         console.error("Erro ao listar quizzes:", e);
     }
 }
 
 // ================================
-//        MODAL
+//        MODAL TURMA
 // ================================
 function abrirModal() {
     document.getElementById("modal").style.display = "flex";
@@ -223,3 +201,16 @@ document.getElementById("btnEntrarTurma").onclick = async function () {
         alert("Erro ao entrar na turma.");
     }
 };
+
+// ================================
+//        MODAL QUIZ
+// ================================
+function abrirModalQuiz() {
+    document.getElementById("modalQuiz").style.display = "flex";
+}
+
+document.getElementById("btnFecharModalQuiz").onclick = function () {
+    document.getElementById("modalQuiz").style.display = "none";
+};
+
+// =====================

@@ -52,6 +52,23 @@ header section {
     height: 100%;
 }
 
+#divperfil {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+#vaiamerda {
+    margin-right: 20%;
+}
+
+#divperfil div {
+    background-color: black;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+}
+
 aside {
     grid-area: aside;
     position: relative;

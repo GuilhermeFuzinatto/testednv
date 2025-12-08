@@ -32,18 +32,13 @@
             <section id="secturmas">
                 <p id="astitulo">Turmas</p>
                 <section id="subsecturmas">
-                    <!--
-                    <button class="divtur"></button>
-                    <button class="divtur"></button>    
-                    <button class="divtur"></button>
-                    -->
                 </section>
             </section>
         </aside>
         <main>
             <section id="fundo">
                 <button onclick="abrirModal()">Entrar em Turma</button>
-                <button>Entrar em Quiz</button>
+                <button onclick="abrirModalQuiz()">Entrar em Quiz</button>
             </section>
             <section id="secmain">
                 <section id="secatvenv">
@@ -51,41 +46,25 @@
                     <section id="carrossel">
                         <button onclick="moveSlide1(-1)" id="butao">&#10094;</button>
                         <section id="seccarrossel1">
-                            <section id="secroladora1">
-                                <!--
-                                <button class="divenv"></button>
-                                <button class="divenv"></button>
-                                <button class="divenv"></button>
-                                <button class="divenv"></button>
-                                <button class="divenv"></button>
-                                <button class="divenv"></button>
-                                -->
-                            </section>
+                            <section id="secroladora1"></section>
                         </section>
                         <button onclick="moveSlide1(1)" id="butao">&#10095;</button>
                     </section>
                 </section>
+
                 <section id="secatvenc">
                     <p id="titulo">Atividades Feitas</p>
                     <section id="carrossel">
                         <button onclick="moveSlide2(-1)" id="butao">&#10094;</button>
                         <section id="seccarrossel2">
-                            <section id="secroladora2">
-                                <!--  
-                                <button class="divenc"></button>
-                                <button class="divenc"></button>
-                                <button class="divenc"></button>
-                                <button class="divenc"></button>
-                                <button class="divenc"></button>
-                                <button class="divenc"></button>
-                                -->
-                            </section>
+                            <section id="secroladora2"></section>
                         </section>
                         <button onclick="moveSlide2(1)" id="butao">&#10095;</button>
                     </section>
                 </section>
             </section>
         </main>
+
         <footer>
             <section id="secfooter">
                 <div class="divfot">
@@ -103,6 +82,16 @@
                 <input type="number" id="inputTurmaId" placeholder="ID da Turma">
                 <button id="btnEntrarTurma">Entrar</button>
                 <button id="btnFecharModal">Fechar</button>
+            </div>
+        </div>
+
+        <!-- ===== MODAL PARA ENTRAR EM QUIZ ===== -->
+        <div id="modalQuiz" class="modal">
+            <div class="modal-content">
+                <h2>Entrar em Quiz</h2>
+                <input type="number" id="inputQuizId" placeholder="ID do Quiz">
+                <button id="btnEntrarQuiz">Entrar</button>
+                <button id="btnFecharModalQuiz">Fechar</button>
             </div>
         </div>
 

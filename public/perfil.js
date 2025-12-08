@@ -18,7 +18,6 @@ function vaiproinicio(){
 }
 
 function tuntuntunsair(){
-    user = ''
     window.location.href = 'login.html'
 }
 
