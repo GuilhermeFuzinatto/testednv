@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login - Buzzle</title>
+</head>
+<body>
+    <header>
+        <section>
+            <div id="divlogo">
+                <img src="imagens/logobuzzle.png">
+            </div>
+
+            <div> 
+                <button class="darkmodeicon" onclick="darkmode()"> 
+                    <img class="darkmodeicon" src="imagens/Darkmodeicon.png">
+                </button> 
+            </div>
+
+            <div id="divnav"></div>
+            <div id="divperfil"></div>
+        </section>
+    </header>
+
+    <main>
+        <section id="fundo">
+
+            <!-- LOGIN ALUNO -->
+            <form class="divprincipal" id="alform">
+                <div class="divtitle"><p>Aluno</p></div>
+
+                <div class="divinput">
+                    <div class="divtext">
+                        <input type="text" placeholder="e-mail ou nome de usuario" id="alemail">
+                    </div>
+
+                    <!-- CORRIGIDO: adicionamos id="aldivsenha" -->
+                    <div class="divsenha" id="aldivsenha">
+                        <input type="password" placeholder="senha" id="alsenha">
+                        <img src="imagens/venao.png" id="alzoi" onclick="verSenhaAluno()">
+                    </div>
+
+                    <div class="divbotao">
+                        <button class="volt" type="button" onclick="window.history.back()">Voltar</button>
+                        <button type="button" class="conc" onclick="loginAluno(event)">Concluir</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- LOGIN PROFESSOR -->
+            <form class="divprincipal" id="prform">
+                <div class="divtitle"><p>Professor</p></div>
+
+                <div class="divinput">
+                    <div class="divtext">
+                        <input type="text" placeholder="e-mail ou nome de usuario" id="premail">
+                    </div>
+
+                    <!-- Já existia id="prdivsenha", mantido -->
+                    <div class="divsenha" id="prdivsenha">
+                        <input type="password" placeholder="senha" id="prsenha">
+                        <img src="imagens/venao.png" id="przoi" onclick="verSenhaProf()">
+                    </div>
+
+                    <div class="divbotao">
+                        <button class="volt" type="button" onclick="window.history.back()">Voltar</button>
+                        <button type="button" class="conc" onclick="loginProf(event)">Concluir</button>
+                    </div>
+                </div>
+            </form>
+
+        </section>
+    </main>
+
+    <footer>
+        <section id="secfooter">
+            <div></div>
+            <div class="divfot">
+                <img src="imagens/ccm.png">
+                <img src="imagens/governo.png">
+            </div>
+            <div class="divfot">
+                <img src="imagens/marsela.png">
+            </div>
+        </section>
+    </footer>
+
+    <script src="login.js"></script>
+</body>
+</html>
