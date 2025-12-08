@@ -115,12 +115,10 @@ async function listarQuizzes() {
     encerradas.innerHTML = "";
 
     // Separar quizzes enviados e encerrados
-    const enviadasLista = quizzes.filter(q => new Date(q.qz_prazo) > new Date());
+    const enviadasLista   = quizzes.filter(q => new Date(q.qz_prazo) > new Date());
     const encerradasLista = quizzes.filter(q => new Date(q.qz_prazo) <= new Date());
 
-    // ---------------------------
-    //   QUIZZES ENVIADOS
-    // ---------------------------
+    // ===== QUIZZES ENVIADOS =====
     if (enviadasLista.length === 0) {
         enviadas.innerHTML = "<p>Nenhuma atividade enviada.</p>";
     } else {
@@ -128,13 +126,17 @@ async function listarQuizzes() {
             const div = document.createElement("button");
             div.className = "divenv";
             div.innerText = qz.qz_nome;
+
+            // *** Permitir abrir relatorio ***
+            div.onclick = () => {
+                window.location.href = `relatorio.html?qz_id=${qz.qz_id}`;
+            };
+
             enviadas.appendChild(div);
         });
     }
 
-    // ---------------------------
-    //   QUIZZES ENCERRADOS
-    // ---------------------------
+    // ===== QUIZZES ENCERRADOS =====
     if (encerradasLista.length === 0) {
         encerradas.innerHTML = "<p>Nenhuma atividade encerrada.</p>";
     } else {
@@ -142,7 +144,14 @@ async function listarQuizzes() {
             const div = document.createElement("button");
             div.className = "divenc";
             div.innerText = qz.qz_nome;
+
+            // *** Permitir abrir relatorio ***
+            div.onclick = () => {
+                window.location.href = `relatorio.html?qz_id=${qz.qz_id}`;
+            };
+
             encerradas.appendChild(div);
         });
     }
 }
+

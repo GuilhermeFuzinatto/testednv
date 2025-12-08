@@ -44,17 +44,22 @@ async function listarQuizzesTurma() {
     }
 
     quizzes.forEach(qz => {
-        const card = document.createElement("button");
-        card.className = "divenv";
-        card.innerText = qz.qz_nome;
-        card.onclick = () => selecQuiz(qz.qz_id, qz.qz_nome, qz.qz_valor, qz.qz_prazo);
-
         const aindaAberto = new Date(qz.qz_prazo) > new Date();
 
+        // cria card estilo homepage
+        const card = document.createElement("div");
+        card.innerText = qz.qz_nome;
+        card.className = aindaAberto ? "divenv" : "divenc";
+
         if (aindaAberto) {
-            enviarPara(enviadas, card);
+            card.onclick = () =>
+                selecQuiz(qz.qz_id, qz.qz_nome, qz.qz_valor, qz.qz_prazo);
+        }
+
+        if (aindaAberto) {
+            enviadas.appendChild(card);
         } else {
-            enviarPara(encerradas, card);
+            encerradas.appendChild(card);
         }
     });
 }

@@ -98,6 +98,21 @@ function selecTurma(id, nome, desc, prid) {
 }
 
 // ================================
+//   ENTRAR NO QUIZ VIA CLICK NO CARD
+// ================================
+function entrarNoQuiz(qz) {
+    const dadosQuiz = {
+        id: qz.qz_id,
+        nome: qz.qz_nome,
+        valor: qz.qz_valor,
+        prazo: qz.qz_prazo
+    };
+
+    localStorage.setItem("quiz", JSON.stringify(dadosQuiz));
+    window.location.href = "quizaluno.html";
+}
+
+// ================================
 //     LISTAR QUIZZES
 // ================================
 async function listarQuizzes() {
@@ -131,6 +146,7 @@ async function listarQuizzes() {
         const enviadasLista = quizzes.filter(q => new Date(q.qz_prazo) > agora);
         const encerradasLista = quizzes.filter(q => new Date(q.qz_prazo) <= agora);
 
+        // ======= PENDENTES (CLICÁVEIS) =======
         if (enviadasLista.length === 0) {
             enviadas.innerHTML = "<p>Nenhuma atividade pendente.</p>";
         } else {
@@ -138,10 +154,15 @@ async function listarQuizzes() {
                 const div = document.createElement("button");
                 div.className = "divenv";
                 div.innerText = qz.qz_nome;
+
+                // ← AQUI: clicar abre o quiz
+                div.onclick = () => entrarNoQuiz(qz);
+
                 enviadas.appendChild(div);
             });
         }
 
+        // ======= ENCERRADAS (NÃO CLICÁVEIS) =======
         if (encerradasLista.length === 0) {
             encerradas.innerHTML = "<p>Nenhuma atividade encerrada.</p>";
         } else {
@@ -149,6 +170,9 @@ async function listarQuizzes() {
                 const div = document.createElement("button");
                 div.className = "divenc";
                 div.innerText = qz.qz_nome;
+
+                // NÃO TEM onclick AQUI
+
                 encerradas.appendChild(div);
             });
         }
@@ -212,5 +236,3 @@ function abrirModalQuiz() {
 document.getElementById("btnFecharModalQuiz").onclick = function () {
     document.getElementById("modalQuiz").style.display = "none";
 };
-
-// =====================

@@ -169,7 +169,7 @@ main {
 #fundo {
     width: 100%;
     height: 20rem;
-    background-image: linear-gradient(#e4e4e4, transparent, transparent, transparent, #fdfdfd);
+    background-image: linear-gradient(#e4e4e4, transparent, transparent, transparent, #fdfdfdfd);
     display: flex;
     align-items: flex-end;
     flex-wrap: wrap;
@@ -183,33 +183,9 @@ main {
     flex-wrap: wrap;
 }
 
-footer {
-    grid-area: footer;
-    position: relative;
-    width: 100%;
-    height: 15rem;
-    background-image: linear-gradient(#fdfdfd, #e4e4e4);
-}
-
-#secfooter {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;   /* centraliza horizontal */
-    align-items: center;       /* centraliza vertical */
-}
-
-.divfot {
-    display: flex;
-    gap: 3rem;                 /* espaço entre as imagens */
-}
-
-.divfot img {
-    height: 8rem;
-}
-
-/*divisor de aguas*/
-
+/* --------------------------
+   MENU TURMA
+--------------------------- */
 #menuTurma {
     width: 100%;
     height: 6rem;
@@ -235,22 +211,42 @@ footer {
     border-color: #ffda33;
 }
 
-#sectionQuizzes {
-    width: 100%;
-    height: calc(100% - 20rem);
+/* --------------------------
+   CARDS DE QUIZ (Buzzle)
+   Igual homepage e turmaaluno
+--------------------------- */
+.divenv, .divenc {
+    width: 15rem;
+    height: 15rem;
     background-color: #fdfdfd;
+    border: 0.4rem solid #e4e4e4;
+    border-radius: 3rem;
+    flex-shrink: 0;
+    flex-grow: 0;
+    transition: 0.5s;
+    font-family: buz1;
+    font-size: 1.3rem;
+    color: #3a1c12;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
 }
 
-#sectionAlunos {
-    width: 100%;
-    height: calc(100% - 20rem);
-    background-color: #fdfdfd;
-    display: flex;
-    flex-wrap: wrap;
+.divenv:hover, .divenc:hover {
+    filter: brightness(95%);
+    border-color: #ffda33;
 }
 
+.divenc {
+    cursor: default !important;
+}
+
+/* --------------------------
+   CARROSSEL
+--------------------------- */
 .carrossel {
     width: 100%;
     height: 12rem;
@@ -292,4 +288,28 @@ footer {
     border-radius: 1rem;
     border: 2px solid #e4e4e4;
     font-family: buz1;
+}
+
+footer {
+    grid-area: footer;
+    width: 100%;
+    height: 15rem;
+    background-image: linear-gradient(#fdfdfd, #e4e4e4);
+}
+
+#secfooter {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divfot {
+    display: flex;
+    gap: 3rem;
+}
+
+.divfot img {
+    height: 8rem;
 }
