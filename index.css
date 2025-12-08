@@ -1,0 +1,182 @@
+@font-face {
+    font-family: buz1;
+    src: url(fonte/Itim-Regular.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: buz1;
+    background-color: #e4e4e4;
+    color: #3a1c12;
+}
+
+/* HEADER */
+header {
+    width: 100%;
+    height: 8rem;
+    background-image: linear-gradient(#fdfdfd, #e4e4e4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+}
+
+#logo {
+    height: 6rem;
+}
+
+nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #3a1c12;
+    font-size: 1.6rem;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    filter: brightness(80%);
+}
+
+#btnEntrar {
+    padding: 0.6rem 1.4rem;
+    background-color: #ffda33;
+    border-radius: 1rem;
+    border: 0.2rem solid #ffda33;
+}
+
+/* HERO */
+#hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5rem 2rem;
+    background-image: linear-gradient(#e4e4e4, #ffffff);
+}
+
+#hero .texto {
+    max-width: 45%;
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+#hero p {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+}
+
+.botao-amarelo {
+    background-color: #ffda33;
+    border: 0.2rem solid #ffda33;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    color: #3a1c12;
+    font-size: 1.7rem;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.botao-amarelo:hover {
+    filter: brightness(90%);
+}
+
+.hero-img {
+    height: 20rem;
+    opacity: 0.9;
+}
+
+/* SEÇÕES */
+section {
+    padding: 5rem 3rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.card {
+    background-color: #ffffff;
+    width: 20rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 10px #0002;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    height: 5rem;
+    margin-bottom: 1rem;
+}
+
+/* COMO FUNCIONA */
+.fluxo {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.etapa {
+    background-color: #ffffff;
+    padding: 2rem;
+    width: 18rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 10px #0002;
+}
+
+.etapa h3 {
+    margin-bottom: 1rem;
+}
+
+/* BENEFÍCIOS */
+#beneficios ul {
+    list-style: none;
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+
+/* CTA FINAL */
+#cta-final {
+    background-image: linear-gradient(#ffffff, #e4e4e4);
+    padding: 5rem;
+}
+
+/* FOOTER */
+footer {
+    background-image: linear-gradient(#ffffff, #e4e4e4);
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    align-items: center;
+}
+
+footer img {
+    height: 6rem;
+}

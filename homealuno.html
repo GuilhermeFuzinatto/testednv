@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="homealuno.css">
+        <title>Homepage Aluno - Buzzle</title>
+    </head>
+    <body>
+        <header>
+            <section>
+                <div id="divlogo">
+                    <img src="imagens/logobuzzle.png">
+                </div>
+                <div id="divnav">
+                    
+                </div>
+                <div id="divperfil">
+                    <a href="perfil.html" id="vaiamerda"><div></div></a>
+                </div>
+            </section>
+        </header>
+        <aside>
+            <section id="secnav">
+                <button class="navbut">
+                    Configurações
+                </button>
+                <button class="navbut" onclick="vaiproinicio()">
+                    Início
+                </button>
+            </section>
+            <section id="secturmas">
+                <p id="astitulo">Turmas</p>
+                <section id="subsecturmas">
+                </section>
+            </section>
+        </aside>
+        <main>
+            <section id="fundo">
+                <button onclick="abrirModal()">Entrar em Turma</button>
+                <button onclick="abrirModalQuiz()">Entrar em Quiz</button>
+            </section>
+            <section id="secmain">
+                <section id="secatvenv">
+                    <p id="titulo">Atividades Pendentes</p>
+                    <section id="carrossel">
+                        <button onclick="moveSlide1(-1)" id="butao">&#10094;</button>
+                        <section id="seccarrossel1">
+                            <section id="secroladora1"></section>
+                        </section>
+                        <button onclick="moveSlide1(1)" id="butao">&#10095;</button>
+                    </section>
+                </section>
+
+                <section id="secatvenc">
+                    <p id="titulo">Atividades Feitas</p>
+                    <section id="carrossel">
+                        <button onclick="moveSlide2(-1)" id="butao">&#10094;</button>
+                        <section id="seccarrossel2">
+                            <section id="secroladora2"></section>
+                        </section>
+                        <button onclick="moveSlide2(1)" id="butao">&#10095;</button>
+                    </section>
+                </section>
+            </section>
+        </main>
+
+        <footer>
+            <section id="secfooter">
+                <div class="divfot">
+                    <img src="imagens/ccm.png">
+                    <img src="imagens/marsela.png">
+                    <img src="imagens/governo.png">
+                </div>
+            </section>
+        </footer>
+
+        <!-- ===== MODAL PARA ENTRAR NA TURMA ===== -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Entrar em Turma</h2>
+                <input type="number" id="inputTurmaId" placeholder="ID da Turma">
+                <button id="btnEntrarTurma">Entrar</button>
+                <button id="btnFecharModal">Fechar</button>
+            </div>
+        </div>
+
+        <!-- ===== MODAL PARA ENTRAR EM QUIZ ===== -->
+        <div id="modalQuiz" class="modal">
+            <div class="modal-content">
+                <h2>Entrar em Quiz</h2>
+                <input type="number" id="inputQuizId" placeholder="ID do Quiz">
+                <button id="btnEntrarQuiz">Entrar</button>
+                <button id="btnFecharModalQuiz">Fechar</button>
+            </div>
+        </div>
+
+        <script src="homealuno.js"></script>
+    </body>
+</html>

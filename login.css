@@ -1,0 +1,278 @@
+@font-face {
+    font-family: buz1;
+    src: url(fonte/Itim-Regular.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "main main main"
+        "footer footer footer";
+    grid-template-columns: 1fr 2fr 2fr;
+    background-color: #e4e4e4;
+}
+
+header {
+    grid-area: header;
+    position: relative;
+    width: 100%;
+    height: 10rem;
+    background-image: linear-gradient(#fdfdfd, #e4e4e4);
+}
+
+header section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#divlogo, #divperfil {
+    width: 20%;
+    height: 100%;
+}
+
+#divlogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#divlogo img {
+    width: 15rem;
+}
+
+#divnav {
+    width: 60%;
+    height: 100%;
+}
+
+.darkmodeicon{
+    height: 50px;
+    position: absolute;
+    right: 5%;
+}
+
+main {
+    grid-area: main;
+    width: 100%;
+    height: calc(100vh);
+    background-image: url(imagens/colmeianova.png);
+}
+
+#fundo {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#e4e4e4, transparent, transparent, transparent, transparent, transparent, #fdfdfd);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.divprincipal{
+    width: 30rem;
+    height: 40rem;
+    background-color: #fdfdfd;
+    border-radius: 2.5rem;
+}
+
+.divtitle{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: buz1;
+    color: #3a1c12;
+    font-size: 4rem;
+}
+
+.divinput{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.divtext{
+    width: 80%;
+    height: 3.9rem;
+    border-radius: 1rem;
+}
+
+.divsenha{
+    width: calc(80% + 0.2rem);
+    height: 3.9rem;
+    border-radius: 1rem;
+    background-color: #e4e4e4;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.divsenha img{
+    width: 3rem;
+    height: 3rem;
+}
+
+input{
+    transition: 0.2s;
+}
+
+input:focus{
+    outline: none;
+    border: 0.2rem solid #ffda33 !important;
+}
+
+#alemail, #alnome, #premail, #prnome{
+    width: 100%;
+    height: 3.5rem;
+    border: 0.2rem solid #e4e4e4;
+    border-radius: 1rem;
+    color: #3a1c12;
+    font-family: buz1;
+    font-size: 2rem;
+}
+
+#alsenha, #prsenha{
+    width: 85%;
+    height: 3.5rem;
+    border: 0.2rem solid #e4e4e4;
+    border-radius: 1rem;
+    color: #3a1c12;
+    font-family: buz1;
+    font-size: 2rem;
+}
+
+.divbotao{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.volt{
+    width: 40%;
+    height: 5rem;
+    border: 0.25rem solid #e4e4e4;
+    border-radius: 2rem;
+    background-color: #fdfdfd;
+    color: #3a1c12;
+    font-family: buz1;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.conc{
+    width: 40%;
+    height: 5rem;
+    border: 0.25rem solid #ffda33;
+    border-radius: 2rem;
+    background-color: #ffda33;
+    color: #3a1c12;
+    font-family: buz1;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.divbotao button:hover{
+    filter: brightness(95%);
+}
+
+footer {
+    grid-area: footer;
+    position: relative;
+    width: 100%;
+    height: 15rem;
+    background-image: linear-gradient(#fdfdfd, #e4e4e4);
+}
+
+#secfooter{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#secfooter div{
+    width: 30%;
+    height: 100%;
+}
+
+.divfot{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.divfot img{
+    height: 8rem;
+}
+
+/* ---------------- DARK MODE ---------------- */
+
+body.dark {
+    background-color: #1b1b1b !important;
+    color: white !important;
+}
+
+/* Header e Footer sem luz branca */
+body.dark header,
+body.dark footer {
+    background-image: none !important;
+    background-color: #202020 !important;
+}
+
+/* Main com imagem diferente no dark mode */
+body.dark main {
+    background-image: url(imagens/colmeianova-dark.png) !important;
+}
+
+/* Fundo interno */
+body.dark #fundo {
+    background-image: linear-gradient(#1b1b1b, transparent, transparent, transparent, #1b1b1b) !important;
+}
+
+/* Cartões, caixas, inputs */
+body.dark .divprincipal,
+body.dark .divsenha,
+body.dark .divtext,
+body.dark input {
+    background-color: #2a2a2a !important;
+    color: white !important;
+    border-color: #555 !important;
+}
+
+/* Bordas quando focado */
+body.dark input:focus {
+    border-color: #ffda33 !important;
+}
+
+/* Botões */
+body.dark .volt {
+    background-color: #2a2a2a !important;
+    border-color: #555 !important;
+    color: white !important;
+}
+
+body.dark .conc {
+    background-color: #ffda33 !important;
+    border-color: #ffda33 !important;
+    color: #1b1b1b !important;
+}
+
+/* Títulos e textos */
+body.dark .divtitle {
+    color: white !important;
+}

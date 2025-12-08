@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="cadquiz.css">
+        <title>Criar Quiz - Buzzle</title>
+    </head>
+    <body>
+        <header>
+            <section>
+                <div id="divlogo">
+                    <img src="imagens/logobuzzle.png">
+                </div>
+                <div id="divnav">
+                    
+                </div>
+                <div id="divperfil">
+                    <a href="perfil.html" id="vaiamerda"><div></div></a>
+                </div>
+            </section>
+        </header>
+        <aside>
+            <section id="secnav">
+                <button class="navbut">
+                    Configurações
+                </button>
+                <button class="navbut" onclick="vaiproinicio()">
+                    Início
+                </button>
+            </section>
+            <section id="secturmas">
+                <p id="astitulo">Turmas</p>
+                <section id="subsecturmas">
+                    <!--
+                    <button class="divtur"></button>
+                    <button class="divtur"></button>    
+                    <button class="divtur"></button>
+                    -->
+                </section>
+            </section>
+        </aside>
+        <main>
+            <section id="fundo">
+                <form id="secmain">
+                    <p id="secmaintitle">Criar Quiz</p>
+                    <div id="divinput">
+                        <div id="div1">
+                            <input id="inputnome" placeholder="Nome">
+                        </div>
+                        <div id="div2">
+                            <input id="inputvalor" type="number" placeholder="Valor" min="0" max="100">
+                            <input id="inputprazo" type="datetime-local" placeholder="Prazo">
+                        </div>
+                    </div>
+                    <div id="divconc">
+                        <button id="butvolt" onclick="history.back()">Voltar</button>
+                        <button id="butconc" type="button" onclick="salvarQuiz()">Continuar</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <section id="secfooter">
+                <div class="divfot">
+                    <img src="imagens/ccm.png">
+                    <img src="imagens/marsela.png">
+                    <img src="imagens/governo.png">
+                </div>
+            </section>
+        </footer>
+        <script src="cadquiz.js"></script>
+    </body>
+</html>
