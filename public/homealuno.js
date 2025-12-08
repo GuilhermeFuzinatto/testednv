@@ -193,8 +193,8 @@ document.getElementById("btnEntrarTurma").onclick = async function () {
         }
 
         alert("Você entrou na turma com sucesso!");
-        document.getElementById("modal").style.display = "none";
         listarTurma();
+        document.getElementById("modal").style.display = "none";
     }
     catch (e) {
         console.error(e);
