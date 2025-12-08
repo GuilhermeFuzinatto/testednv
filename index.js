@@ -714,6 +714,55 @@ app.get('/quiz/:qz_id/respostas', (req, res) => {
 /////////////////////////// Outras Merdas Malditas ////////////////////////////
 /////////////////////////// Outras Merdas Malditas ////////////////////////////
 
+//A parada que fazem os alunos q existem conseguirem comprovar sua 
+//existencia atraves do loging (loging>>>>)
+
+app.post("/login/aluno", (req, res) => {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+        return res.status(400).json({ error: "Email/usuário e senha obrigatórios" });
+    }
+
+    const sql = `
+        SELECT * FROM Aluno 
+        WHERE (al_email = ? OR al_nome = ?)
+        AND al_senha = ?
+    `;
+
+    db.get(sql, [email, email, senha], (err, row) => {
+        if (err) return res.status(500).json({ error: "Erro no servidor" });
+
+        if (!row) return res.status(401).json({ error: "Credenciais inválidas" });
+
+        res.json({ message: "Login OK", aluno: row });
+    });
+});
+
+// O mesmo para os professores
+
+app.post("/login/prof", (req, res) => {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+        return res.status(400).json({ error: "Email/usuário e senha obrigatórios" });
+    }
+
+    const sql = `
+        SELECT * FROM Prof 
+        WHERE (pr_email = ? OR pr_nome = ?)
+        AND pr_senha = ?
+    `;
+
+    db.get(sql, [email, email, senha], (err, row) => {
+        if (err) return res.status(500).json({ error: "Erro no servidor" });
+
+        if (!row) return res.status(401).json({ error: "Credenciais inválidas" });
+
+        res.json({ message: "Login OK", prof: row });
+    });
+});
+
 // Teste para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.send('Servidor está rodando e tabelas criadas!');
